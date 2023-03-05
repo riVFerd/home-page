@@ -1,26 +1,34 @@
 import {useEffect, useState} from "react";
 
+const makeTwoDigits = (number) => number.toString().padStart(2, '0');
+
+const getDate = (date) => {
+    return date.toLocaleDateString('en-UK', {
+        day: '2-digit',
+        weekday: 'long',
+        month: 'long',
+        year: 'numeric'
+    })
+}
+
+const getTime = (date) => {
+    return {
+        hours: makeTwoDigits(date.getHours()),
+        minutes: makeTwoDigits(date.getMinutes()),
+        seconds: makeTwoDigits(date.getSeconds())
+    }
+}
+
 const DateAndClock = (props) => {
-
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState({});
-
-    const makeTwoDigits = (number) => number.toString().padStart(2, '0');
+    const dateTime = new Date();
+    const [date, setDate] = useState(getDate(dateTime));
+    const [time, setTime] = useState(getTime(dateTime));
 
     useEffect(() => {
         setInterval(() => {
-            const newDateTime = new Date();
-            setDate(newDateTime.toLocaleDateString('en-UK', {
-                day: '2-digit',
-                weekday: 'long',
-                month: 'long',
-                year: 'numeric'
-            }))
-            setTime({
-                hours: makeTwoDigits(newDateTime.getHours()),
-                minutes: makeTwoDigits(newDateTime.getMinutes()),
-                seconds: makeTwoDigits(newDateTime.getSeconds())
-            })
+            const newDateTime = new Date()
+            setDate(getDate(newDateTime))
+            setTime(getTime(newDateTime))
         }, 1000);
     }, []);
 
