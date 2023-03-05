@@ -33,7 +33,7 @@ const DateAndClock = (props) => {
     }, []);
 
     return (
-        <div id={props.id} className={'container flex flex-col'}>
+        <div id={props.id} className={'container flex flex-col' + ` ${props.className}`}>
             <div id={'date'} className={''}>{date}</div>
             <div id={'clock'}>
                 <p className={'text-4xl font-bold'}>
