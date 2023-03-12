@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import {CiTempHigh, CiDroplet} from "react-icons/ci";
 import {BsDropletHalf} from "react-icons/bs";
 import {FaTemperatureLow} from "react-icons/fa";
+import {PropagateLoader} from "react-spinners";
 
 const Weather = (props) => {
     const [weatherData, setWeatherData] = useState();
@@ -18,13 +18,15 @@ const Weather = (props) => {
         <div id={props.id} className={'flex flex-col items-center gap-2'}>
             {
                 (!weatherData)
-                    ? <p>Loading...</p>
+                    ? <PropagateLoader color={'#87CEFA'} className={'mb-8'}/>
                     : <>
-                    <img className={'w-[64px]'} src={weatherData['condition'].icon}/>
-                    <div className={'flex gap-8'}>
-                        <div className={'flex items-center gap-1'}><FaTemperatureLow/><span>{weatherData['temp_c']}°C</span></div>
-                        <div className={'flex items-center gap-1'}><BsDropletHalf/><span>{weatherData['humidity']}%</span></div>
-                    </div>
+                        <img className={'w-[64px]'} src={weatherData['condition'].icon}/>
+                        <div className={'flex gap-8'}>
+                            <div className={'flex items-center gap-1'}>
+                                <FaTemperatureLow/><span>{weatherData['temp_c']}°C</span></div>
+                            <div className={'flex items-center gap-1'}>
+                                <BsDropletHalf/><span>{weatherData['humidity']}%</span></div>
+                        </div>
                     </>
             }
         </div>
