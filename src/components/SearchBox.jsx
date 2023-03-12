@@ -60,11 +60,11 @@ const SearchBox = (props) => {
     };
 
     return (
-        <div id={props.id} className="w-[40rem]">
+        <div id={props.id} className={props.className}>
             <form onSubmit={handleSubmit} className={'flex justify-center'}>
-                <Select ref={selectRef} defaultValue={engines[0]} options={engines}
+                <Select className={'2/12'} ref={selectRef} defaultValue={engines[0]} options={engines}
                         formatOptionLabel={formatOptionLabel} styles={selectStyle} isSearchable={false}/>
-                <span className={'flex items-center justify-between rounded mx-2 w-9/12 bg-[#3b3b3b]'}>
+                <span className={'flex items-center justify-between rounded mx-2 w-10/12 bg-[#3b3b3b]'}>
                     <input type="text" className={'focus:outline-none w-11/12 rounded px-4 py-2'}
                            placeholder="Search..." onChange={handleInputChange} onKeyDown={handleKeyDown} value={input}
                            autoFocus={true}/>
