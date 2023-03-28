@@ -10,7 +10,7 @@ function App() {
         <div className='row flex justify-center items-center gap-4 px-12'>
             <div className="col w-3/12 shrink-0">
             </div>
-            <div className="col flex flex-col gap-2 w-6/12 shrink-0 -translate-y-12">
+            <div className="col flex flex-col gap-2 w-6/12 shrink-0 -translate-y-24">
                 <Weather id='weather'/>
                 <DateAndClock id='dateAndClock' className='mb-6'/>
                 <SearchBox id='searchBox'/>
