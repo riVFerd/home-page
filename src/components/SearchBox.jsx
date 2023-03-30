@@ -15,6 +15,9 @@ const engines = [
     }
 ];
 
+// Get history from localStorage
+const getHistory = () => JSON.parse(localStorage.getItem('history'));
+
 const SearchBox = (props) => {
     const [input, setInput] = useState('');
     const selectRef = useRef(null);
@@ -23,10 +26,10 @@ const SearchBox = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (JSON.parse(localStorage.getItem('history')) === null) {
+        if (getHistory() === null) {
             localStorage.setItem('history', JSON.stringify([input.toLowerCase()]));
         } else {
-            localStorage.setItem('history', JSON.stringify([...JSON.parse(localStorage.getItem('history')), input.toLowerCase()]));
+            localStorage.setItem('history', JSON.stringify([...getHistory(), input.toLowerCase()]));
         }
         window.location.href = `${selectRef.current.state.selectValue[0].value + input.replace(/\s+/g, "+")}`;
     }
@@ -81,13 +84,13 @@ const SearchBox = (props) => {
                     <div className="history">
                         <ul className='absolute bg-[#3b3b3b] w-10/12 -translate-x-1/2 -translate-y-2'>
                             {
-                                (JSON.parse(localStorage.getItem('history')) != null && input !== '')
-                                    ? JSON.parse(localStorage.getItem('history')).map((item, index) => {
+                                (getHistory() != null && input !== '')
+                                    ? getHistory().map((item, index) => {
                                         let list = [];
                                         if (item.includes(input.toLowerCase()) || input === ' ') {
                                                 list.push(<li className='cursor-pointer' key={index} onClick={setInput.bind(this, item)}>{item}</li>);
                                         }
-                                        if (index === JSON.parse(localStorage.getItem('history')).length - 1) {
+                                        if (index === getHistory().length - 1) {
                                             list.push(<li key={index+1} className='cursor-pointer text-red-500' onClick={() => {
                                                 localStorage.setItem('history', null)
                                                 setInput('')
