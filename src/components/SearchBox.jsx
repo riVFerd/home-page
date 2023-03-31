@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import Select from 'react-select';
 import {SiMicrosoftbing} from "react-icons/si";
 import {FcGoogle} from "react-icons/fc";
@@ -50,6 +50,26 @@ const SearchBox = (props) => {
             </a>
     );
 
+    const showSuggestion = () => {
+        if (getHistory() != null && input !== '') {
+            let counter = 0;
+            let list = [];
+            for(let index = 0; index < getHistory().length; index++) {
+                if (counter > 5) break;
+                if (getHistory()[index].includes(input.toLowerCase()) || input === ' ') {
+                    list.push(<li className='cursor-pointer' key={index}
+                                  onClick={setInput.bind(this, getHistory()[index])}>{getHistory()[index]}</li>);
+                    counter++;
+                }
+            }
+            if (counter > 0) list.push(<li key={99} className='cursor-pointer text-red-500' onClick={() => {
+                localStorage.setItem('history', null)
+                setInput('')
+            }}>Clear history</li>);
+            return <>{list}</>;
+        }
+    }
+
     // style for react-select
     const selectStyle = {
         control: (baseStyles, state) => ({
@@ -84,21 +104,7 @@ const SearchBox = (props) => {
                     <div className="history">
                         <ul className='absolute bg-[#3b3b3b] w-10/12 -translate-x-1/2 -translate-y-2'>
                             {
-                                (getHistory() != null && input !== '')
-                                    ? getHistory().map((item, index) => {
-                                        let list = [];
-                                        if (item.includes(input.toLowerCase()) || input === ' ') {
-                                                list.push(<li className='cursor-pointer' key={index} onClick={setInput.bind(this, item)}>{item}</li>);
-                                        }
-                                        if (index === getHistory().length - 1) {
-                                            list.push(<li key={index+1} className='cursor-pointer text-red-500' onClick={() => {
-                                                localStorage.setItem('history', null)
-                                                setInput('')
-                                            }}>Clear history</li>);
-                                        }
-                                        return <>{list}</>;
-                                    })
-                                    : null
+                                showSuggestion()
                             }
                         </ul>
                     </div>
