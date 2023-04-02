@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react";
 import Select from 'react-select';
 import {SiMicrosoftbing} from "react-icons/si";
-import {FcGoogle} from "react-icons/fc";
+import {FcGoogle,FcStart} from "react-icons/fc";
 import {ImSearch} from "react-icons/im";
 
 const engines = [
@@ -12,6 +12,10 @@ const engines = [
     {
         label: <FcGoogle/>,
         value: 'https://www.google.com/search?q=',
+    },
+    {
+        label: <FcStart/>,
+        value: 'https://www.youtube.com/results?search_query=',
     }
 ];
 
@@ -26,10 +30,11 @@ const SearchBox = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (input.trim().length === 0) return;
         if (getHistory() === null) {
             localStorage.setItem('history', JSON.stringify([input.toLowerCase()]));
         } else {
-            localStorage.setItem('history', JSON.stringify([...getHistory(), input.toLowerCase()]));
+            localStorage.setItem('history', JSON.stringify([input.toLowerCase(), ...getHistory()]));
         }
         window.location.href = `${selectRef.current.state.selectValue[0].value + input.replace(/\s+/g, "+")}`;
     }
@@ -40,15 +45,22 @@ const SearchBox = (props) => {
             // If Enter key is pressed
             handleSubmit(event);
         }
+        switch (event.keyCode) {
+            // combinations key of shift+1, shift+2 and shift+3 will change the search engine option
+            case 49:
+                selectRef.current.setValue(engines[0]);
+                event.preventDefault();
+                break;
+            case 50:
+                selectRef.current.setValue(engines[1]);
+                event.preventDefault();
+                break;
+            case 51:
+                selectRef.current.setValue(engines[2]);
+                event.preventDefault();
+                break;
+        }
     };
-
-    const formatOptionLabel = (data, isSelected) => (
-        (!(isSelected.selectValue[0].value === data.value))
-            ? <a className={'flex justify-center'}>{data.label}</a>
-            : <a href={data.value} className={'flex justify-center'}>
-                {data.label}
-            </a>
-    );
 
     const showSuggestion = () => {
         if (getHistory() != null && input !== '') {
@@ -69,6 +81,14 @@ const SearchBox = (props) => {
             return <>{list}</>;
         }
     }
+
+    const formatOptionLabel = (data, isSelected) => (
+        (!(isSelected.selectValue[0].value === data.value))
+            ? <a className={'flex justify-center'}>{data.label}</a>
+            : <a href={data.value} className={'flex justify-center'}>
+                {data.label}
+            </a>
+    );
 
     // style for react-select
     const selectStyle = {
