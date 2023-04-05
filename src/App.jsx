@@ -5,9 +5,11 @@ import Weather from "./components/Weather.jsx";
 import Notes from "./components/Notes.jsx";
 import {useState} from "react";
 import {FcSettings} from "react-icons/fc";
+import TopSites from "./components/TopSites.jsx";
 
 function App() {
     const [isSettingsMode, setIsSettingsMode] = useState(false);
+    const [username, setUsername] = useState(localStorage.getItem('username') || 'User');
 
     const handleSettingsSubmit = (e) => {
         e.preventDefault();
@@ -35,8 +37,9 @@ function App() {
             </div>
             <div className="col flex flex-col gap-2 w-6/12 shrink-0 -translate-y-24">
                 <Weather id='weather'/>
-                <DateAndClock id='dateAndClock' className='mb-6'/>
+                <DateAndClock id='dateAndClock' className='mb-6' username={username}/>
                 <SearchBox id='searchBox'/>
+                <TopSites/>
             </div>
             <div className="col w-3/12 shrink-0">
                 <Notes id='notes'/>
