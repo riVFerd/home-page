@@ -12,14 +12,13 @@ import {gsap} from "gsap";
 
 function App() {
     const [isSettingsMode, setIsSettingsMode] = useState(false);
-    const [username, setUsername] = useState(localStorage.getItem('username') || 'User');
 
     const handleSettingsSubmit = (e) => {
         e.preventDefault();
-        console.log(e)
-        localStorage.setItem('username', e.target['username'].value);
-        localStorage.setItem('city', e.target['city'].value);
-        alert('Settings submitted!');
+        localStorage.setItem('username', (e.target['username'].value === '' ? localStorage.getItem('username') : e.target['username'].value));
+        localStorage.setItem('city', (e.target['city'].value === '' ? localStorage.getItem('city') : e.target['city'].value));
+        alert('Settings updated!');
+        window.location.reload();
     }
 
     useEffect(() => {
@@ -55,7 +54,7 @@ function App() {
             </div>
             <div className="col flex flex-col gap-2 w-6/12 shrink-0 -translate-y-8">
                 <Weather id='weather' className='dark:text-white min-h-[96px]'/>
-                <DateAndClock id='dateAndClock' className='mb-6 dark:text-white' username={username}/>
+                <DateAndClock id='dateAndClock' className='mb-6 dark:text-white'/>
                 <SearchBox id='searchBox'/>
                 <TopSites id='topSites' className='text-white'/>
             </div>
