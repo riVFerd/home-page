@@ -1,5 +1,5 @@
 import React from "react";
-import {FaYoutube, FaGithub, FaFacebook, FaInstagram, FaPinterest} from 'react-icons/fa';
+import {FaYoutube, FaGithub, FaFacebook, FaInstagram, FaLinkedin} from 'react-icons/fa';
 
 const sites = [
     {
@@ -24,9 +24,9 @@ const sites = [
         icon: <FaInstagram className="text-light" size='2.5em'/>
     }, {
         id: 'top5',
-        name: 'Pinterest',
-        url: 'https://www.pinterest.com/',
-        icon: <FaPinterest className="text-light" size='2.5em'/>
+        name: 'LinkedIn',
+        url: 'https://www.linkedin.com/',
+        icon: <FaLinkedin className="text-light" size='2.5em'/>
     }
 ];
 
