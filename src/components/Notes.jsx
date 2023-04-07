@@ -27,9 +27,9 @@ const Notes = (props) => {
     }, []);
 
     return (
-        <div id={props.id} className={'flex flex-col rounded-md bg-gray-600 ' + `${props.className}}`}>
+        <div id={props.id} className={'flex flex-col rounded-md bg-gray-600 text-white ' + `${props.className}}`}>
             <div className="flex justify-between p-2">
-                <h1 className='text-2xl'>Notes</h1>
+                <h1 className='text-2xl font-bold'>Notes</h1>
                 <div className='flex gap-2'>
                     <button id='saveButton' className='bg-gray-50 hover:bg-gray-300 p-2 rounded-md' onClick={saveNotes}>
                         <AiTwotoneSave className='text-xl text-black'/>
@@ -41,7 +41,7 @@ const Notes = (props) => {
                     </button>
                 </div>
             </div>
-            <textarea id='notesBox' className={'h-80 w-full resize-none p-4 outline-none rounded-md ' } spellCheck='false' value={notes}
+            <textarea id='notesBox' className={'h-80 w-full resize-none p-4 outline-none rounded-md bg-accent-gray' } spellCheck='false' value={notes}
                       onChange={handleNotesChange}/>
         </div>
     )

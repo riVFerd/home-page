@@ -84,8 +84,8 @@ const SearchBox = (props) => {
 
     const formatOptionLabel = (data, isSelected) => (
         (!(isSelected.selectValue[0].value === data.value))
-            ? <a className={'flex justify-center'}>{data.label}</a>
-            : <a href={data.value} className={'flex justify-center'}>
+            ? <a className={'flex justify-center text-[#0000ff]'}>{data.label}</a>
+            : <a href={data.value} className={'flex justify-center text-[#0000ff]'}>
                 {data.label}
             </a>
     );
@@ -113,16 +113,16 @@ const SearchBox = (props) => {
                         formatOptionLabel={formatOptionLabel} styles={selectStyle} isSearchable={false}/>
                 <span className={'flex flex-col items-center justify-between rounded mx-0 w-10/12 bg-[#3b3b3b]'}>
                     <div id="search-input" className='flex items-center justify-between rounded w-full bg-[#3b3b3b]'>
-                        <input type="text" className={'focus:outline-none w-11/12 rounded px-4 py-2'}
+                        <input type="text" className={'focus:outline-none w-11/12 rounded px-4 py-2 bg-accent-gray text-white'}
                                placeholder="Search..." onChange={handleInputChange} onKeyDown={handleKeyDown}
                                value={input}
                                autoFocus={true}/>
-                        <button type={'submit'} className={'flex items-center pr-4'}>
+                        <button type={'submit'} className={'flex items-center pr-4 text-white'}>
                             <ImSearch/>
                         </button>
                     </div>
                     <div className="history">
-                        <ul className='absolute bg-[#3b3b3b] w-10/12 -translate-x-1/2 -translate-y-2'>
+                        <ul className='absolute bg-[#3b3b3b] w-10/12 -translate-x-1/2 -translate-y-2 text-white'>
                             {
                                 showSuggestion()
                             }

@@ -15,7 +15,7 @@ const Weather = (props) => {
     }, []);
 
     return (
-        <div id={props.id} className={'flex flex-col items-center gap-2'}>
+        <div id={props.id} className={'flex flex-col items-center gap-2 ' + props.className }>
             {
                 (!weatherData)
                     ? <PropagateLoader color={'#87CEFA'} className={'mb-8'}/>

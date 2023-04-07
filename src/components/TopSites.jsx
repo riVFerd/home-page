@@ -33,15 +33,14 @@ const sites = [
 // make hover effect style
 
 
-const TopSites = () => {
+const TopSites = (props) => {
 
     const handleSite = (url) => {
         window.location.href = url;
     }
 
     return (
-        <>
-            <div className="flex flex-wrap justify-around">
+            <div id={props.id} className={"flex flex-wrap justify-around " + props.className}>
                 {sites.map((site) => (
                     <div key={site.id}
                          className="flex flex-col justify-center items-center w-24 h-24 cursor-pointer hover:scale-110 hover:bg-gray-500 bg-gray-600 mx-2 my-4 rounded-md"
@@ -53,7 +52,6 @@ const TopSites = () => {
                     </div>
                 ))}
             </div>
-        </>
     );
 }
 
