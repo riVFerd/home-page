@@ -45,21 +45,6 @@ const SearchBox = (props) => {
             // If Enter key is pressed
             handleSubmit(event);
         }
-        switch (event.keyCode) {
-            // combinations key of shift+1, shift+2 and shift+3 will change the search engine option
-            case 49:
-                selectRef.current.setValue(engines[0]);
-                event.preventDefault();
-                break;
-            case 50:
-                selectRef.current.setValue(engines[1]);
-                event.preventDefault();
-                break;
-            case 51:
-                selectRef.current.setValue(engines[2]);
-                event.preventDefault();
-                break;
-        }
     };
 
     const showSuggestion = () => {
